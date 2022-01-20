@@ -7,7 +7,7 @@ class Order extends React.Component {
     const count = this.props.order[key];
     const isAvailable = fish && fish.status === "available";
     if (!isAvailable) {
-      return <li>
+      return <li key={key}>
         Sorry {fish ? fish.name : "fish"} is no longer available
       </li>
     }
@@ -16,7 +16,7 @@ class Order extends React.Component {
       <li key={key}>
         {count} lbs
         <span>{this.props.fishes[key].name} </span>
-        @ {formatPrice(count * fish.price)}
+        {formatPrice(count * fish.price)}
       </li>
     );
   }
@@ -26,6 +26,7 @@ class Order extends React.Component {
       const fish = this.props.fishes[key];
       const count = this.props.order[key];
       const isAvailable = fish && fish.status === "available";
+      if (!fish) { return null; }
       if (isAvailable) {
         return prev + (count * fish.price);
       }
@@ -37,7 +38,9 @@ class Order extends React.Component {
         <ul className="order">
           {ids.map(key => this.renderOrder(key))}
         </ul>
-        <p className="total">Total: {formatPrice(orderTotal)}</p>
+        <p className="total">
+          Total: <strong>{formatPrice(orderTotal)}</strong>
+        </p>
       </div>
     );
   }

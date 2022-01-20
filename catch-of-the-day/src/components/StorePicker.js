@@ -1,11 +1,19 @@
 import React from 'react';
+import PropTypes from "prop-types";
 import { getFunName } from '../helpers';
 class StorePicker extends React.Component {
+
+  static propTypes = {
+    history: PropTypes.object
+  };
+
+  inputRef = React.createRef();
+
   constructor() {
     super();
     this.transferToStore = this.transferToStore.bind(this);
   }
-  inputRef = React.createRef();
+
   render() {
     {/* Must have a single return element, can use empty element <></> or <React.Fragment> */ }
     return (
